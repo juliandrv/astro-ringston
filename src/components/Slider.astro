@@ -11,7 +11,7 @@
 
   let mm = gsap.matchMedia();
   mm.add('(min-width: 768px)', () => {
-    let slider = document.querySelector('.slider');
+    let slider: any = document.querySelector('.slider');
     let sliderSections = gsap.utils.toArray('.slide');
 
     let sliderTl = gsap.timeline({
@@ -42,7 +42,7 @@
         '<'
       );
 
-    sliderSections.forEach((slider) => {
+    sliderSections.forEach((slider: any) => {
       const slideText = new SplitType(
         slider.querySelector('.slide-p'),
         { types: 'chars' }
