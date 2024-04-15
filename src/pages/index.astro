@@ -1,0 +1,43 @@
+---
+import '../styles/global.css';
+
+import Loader from '../components/Loader.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import Details from '../components/Details.astro';
+import Slider from '../components/Slider.astro';
+import Contact from '../components/Contact.astro';
+import World from '../components/World';
+---
+
+<script>
+  import Lenis from '@studio-freight/lenis';
+  const lenis = new Lenis();
+
+  function raf(time) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
+
+  requestAnimationFrame(raf);
+</script>
+
+<html lang='en'>
+  <head>
+    <meta charset='utf-8' />
+    <link rel='icon' type='image/svg+xml' href='/favicon.svg' />
+    <meta name='viewport' content='width=device-width' />
+    <meta name='generator' content={Astro.generator} />
+    <title>Ringston</title>
+  </head>
+  <body>
+    <!-- <Loader /> -->
+    <Header />
+    <Hero />
+    <Details />
+    <Slider />
+    <Contact />
+    <section></section>
+    <World client:only='react' />
+  </body>
+</html>

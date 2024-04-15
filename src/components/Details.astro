@@ -1,0 +1,131 @@
+---
+
+---
+
+<script>
+  import gsap from 'gsap';
+  import ScrollTrigger from 'gsap/ScrollTrigger';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const detailsTl = gsap.timeline({
+    scrollTrigger: {
+      trigger: '.inspection',
+      start: 'top center',
+      end: 'bottom center',
+      scrub: true,
+    },
+  });
+
+  detailsTl
+    .to('.inspection h2', {
+      y: -100,
+    })
+    .to(
+      '.ring-bg',
+      {
+        y: -50,
+        height: 300,
+      },
+      '<'
+    );
+
+  gsap.to('.marquee h3', {
+    scrollTrigger: {
+      trigger: '.marquee h3',
+      start: 'top 80%',
+      end: 'bottom top',
+      scrub: true,
+    },
+    x: 200,
+  });
+</script>
+
+<section class='details'>
+  <div class='inspection layout-ws'>
+    <h2>68</h2>
+    <div class='ring-bg'>
+      <p>Point Inspection</p>
+    </div>
+    <p>
+      Our 68-point inspection at Ringston meticulously examines every
+      aspect of the jewelry, from clasp strength to gemstone clarity,
+      guaranteeing unparalleled quality in every piece.
+    </p>
+  </div>
+  <div class='mask marquee'>
+    <h3>precision</h3>
+  </div>
+</section>
+
+<style>
+  section {
+    height: 100vh;
+  }
+
+  .details {
+    margin-bottom: 0;
+  }
+
+  .inspection {
+    text-align: center;
+    margin-top: 10em;
+
+    h2 {
+      font-size: clamp(5rem, 6vw, 8rem);
+      margin: 0;
+    }
+
+    .ring-bg {
+      background: #000 url('/images/rings.jpg') no-repeat;
+      background-size: cover;
+      padding: 3em 0;
+      color: white;
+      font-weight: bold;
+      border-radius: 0.3em;
+      font-size: 1.4rem;
+    }
+  }
+
+  h3 {
+    font-size: clamp(7rem, 17vw, 23rem);
+    margin: 0;
+    color: #f5f5f5;
+  }
+
+  .marquee {
+    overflow: hidden;
+  }
+
+  .details {
+    margin-bottom: 10em;
+  }
+
+  @media (min-width: 768px) {
+    .inspection {
+      display: flex;
+      align-items: center;
+      gap: 2em;
+      max-width: 1200px;
+      margin: 15em auto 0;
+
+      h2 {
+        flex: 0.3;
+      }
+      > div {
+        flex: 1;
+        height: 100px;
+        display: grid;
+        place-content: center;
+
+        p {
+          text-align: center;
+        }
+      }
+      p {
+        flex: 1;
+        text-align: left;
+      }
+    }
+  }
+</style>

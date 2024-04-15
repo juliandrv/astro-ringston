@@ -1,0 +1,179 @@
+---
+
+---
+
+<script>
+  import gsap from 'gsap';
+  import ScrollTrigger from 'gsap/ScrollTrigger';
+  import SplitType from 'split-type';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  let mm = gsap.matchMedia();
+  mm.add('(min-width: 768px)', () => {
+    let slider = document.querySelector('.slider');
+    let sliderSections = gsap.utils.toArray('.slide');
+
+    let sliderTl = gsap.timeline({
+      defaults: {
+        ease: 'none',
+      },
+      scrollTrigger: {
+        trigger: slider,
+        pin: true,
+        scrub: 1,
+        end: () => '+=' + slider.offsetWidth,
+      },
+    });
+
+    sliderTl
+      .to(
+        slider,
+        {
+          xPercent: -66.66,
+        },
+        '<'
+      )
+      .to(
+        '.progress',
+        {
+          width: '100%',
+        },
+        '<'
+      );
+
+    sliderSections.forEach((slider) => {
+      const slideText = new SplitType(
+        slider.querySelector('.slide-p'),
+        { types: 'chars' }
+      );
+
+      sliderTl.from(slideText.chars, {
+        opacity: 0,
+        y: 10,
+        stagger: 0.03,
+        scrollTrigger: {
+          trigger: slider.querySelector('.slide-p'),
+          start: 'top bottom',
+          end: 'bottom center',
+          containerAnimation: sliderTl,
+          scrub: true,
+        },
+      });
+    });
+  });
+</script>
+
+<div class='no-overflow'>
+  <section class='slider'>
+    <div class='slide'>
+      <div class='inner layout-ws'>
+        <p class='slide-p'>
+          This stunning new necklace from Elegance Collection features
+          a radiant sapphire centerpiece, encircled by a halo of
+          ethereal diamonds, making it a breathtaking addition to any
+          attire.
+        </p>
+      </div>
+    </div>
+    <div class='slide'>
+      <div class='inner layout-ws'>
+        <p class='slide-p'>
+          This stunning new necklace from Elegance Collection features
+          a radiant sapphire centerpiece, encircled by a halo of
+          ethereal diamonds, making it a breathtaking addition to any
+          attire.
+        </p>
+      </div>
+    </div>
+    <div class='slide'>
+      <div class='inner layout-ws'>
+        <p class='slide-p'>
+          This stunning new necklace from Elegance Collection features
+          a radiant sapphire centerpiece, encircled by a halo of
+          ethereal diamonds, making it a breathtaking addition to any
+          attire.
+        </p>
+      </div>
+    </div>
+    <div class='progress'></div>
+  </section>
+</div>
+
+<style>
+  .no-overflow {
+    overflow: hidden;
+  }
+
+  .slider {
+    height: auto;
+    width: 100%;
+
+    .slide {
+      width: 100%;
+      height: 100vh;
+      background-size: cover;
+      background-size: 100% 100%;
+
+      .inner {
+        display: flex;
+        height: 100vh;
+      }
+    }
+    .slide:nth-of-type(1) {
+      background: #000 url('/images/slide1.jpg') no-repeat center
+        center;
+      background-size: cover;
+      color: white;
+
+      p {
+        width: 100%;
+        font-size: clamp(1.2rem, 2vw, 2.5rem);
+      }
+    }
+    .slide:nth-of-type(2) {
+      background: #000 url('/images/slide2.jpg') no-repeat center
+        center;
+      background-size: cover;
+      color: white;
+
+      p {
+        width: 100%;
+        font-size: clamp(1.2rem, 2vw, 2.5rem);
+      }
+    }
+    .slide:nth-of-type(3) {
+      background: #000 url('/images/slide3.jpg') no-repeat center
+        center;
+      background-size: cover;
+      color: white;
+
+      p {
+        width: 100%;
+        font-size: clamp(1.2rem, 2vw, 2.5rem);
+      }
+    }
+
+    .progress {
+      position: absolute;
+      top: 80%;
+      width: 0%;
+      height: 1px;
+      z-index: 100;
+      border-bottom: 1px solid white;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .slider {
+      width: 300%;
+      display: flex;
+
+      .slide:nth-of-type(1) p,
+      .slide:nth-of-type(2) p,
+      .slide:nth-of-type(3) p {
+        width: 50%;
+      }
+    }
+  }
+</style>

@@ -1,0 +1,74 @@
+@font-face {
+  font-family: 'Geist';
+  src: url('/font/Geist-Light.woff2') format('woff2');
+  font-weight: 300; /* or the correct weight for Geist-Light */
+}
+
+@font-face {
+  font-family: 'Geist';
+  src: url('/font/Geist-Bold.woff2') format('woff2');
+  font-weight: 700; /* or the correct weight for Geist-Bold */
+}
+
+body {
+  margin: 0;
+  background: #fff url('/bg.svg');
+  font-family: 'Geist', sans-serif;
+  height: 100vh; /* Remove later */
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  outline: none;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.mask {
+  overflow: hidden;
+}
+
+.layout-ws {
+  width: 100%;
+  box-sizing: border-box;
+  padding: clamp(16px, 5%, 100px); /* Adjust for fluid side margins */
+}
+
+/* Loader */
+.loading-screen {
+  position: fixed;
+  z-index: 100;
+  height: 100%;
+  width: 100%;
+  background: rgb(237, 248, 255);
+  display: grid;
+  place-content: center;
+  transition: transform 1s ease-in-out;
+
+  svg {
+    animation: growRing 1.5s ease-in-out infinite;
+  }
+}
+
+@keyframes growRing {
+  0% {
+    transform: scale(0.7);
+  }
+  50% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0.7);
+  }
+}
+
+.hide-loader {
+  transform: translateY(-100%);
+}

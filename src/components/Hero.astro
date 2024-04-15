@@ -1,0 +1,128 @@
+---
+
+---
+
+<script>
+  import gsap from 'gsap';
+  import SplitType from 'split-type';
+
+  const animateWords = () => {
+    const words = ['Romance', 'Rings', 'Relationships'];
+    const textElement: any = document.querySelector(
+      '.primary-h1 span'
+    );
+
+    let currentIndex = 0;
+    let split = null;
+
+    const animateChars = (chars) => {
+      gsap.from(chars, {
+        yPercent: 100,
+        stagger: 0.03,
+        duration: 1.5,
+        ease: 'power4.out',
+        onComplete: () => {
+          if (split) split.revert();
+        },
+      });
+    };
+
+    const updateText = () => {
+      textElement.textContent = words[currentIndex];
+      split = new SplitType(textElement, { types: 'chars' });
+      animateChars(split.chars);
+      currentIndex = (currentIndex + 1) % words.length;
+    };
+
+    setInterval(updateText, 3000);
+  };
+
+  animateWords();
+</script>
+
+<main class='hero'>
+  <div class='left layout-ws'>
+    <h1>
+      <div class='mask primary-h1'>
+        <span>Relationships</span>
+      </div>
+      <div class='mask'>
+        <span>Redefined</span>
+      </div>
+    </h1>
+  </div>
+  <div class='right'>
+    <div class='vid-overlay'></div>
+    <video autoplay muted loop>
+      <source src='videos/hands.mp4' type='video/mp4' />
+    </video>
+  </div>
+</main>
+
+<style>
+  hero {
+    height: 100vh;
+  }
+
+  main {
+    .left {
+      align-self: last baseline;
+      flex: 1;
+      height: 90vh;
+      display: flex;
+
+      h1 {
+        font-size: clamp(3rem, 7vw, 11rem);
+        align-self: last baseline;
+        font-weight: 300;
+        margin: 0;
+      }
+    }
+    #gui {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+    }
+    .right {
+      height: 100vh;
+      flex: 0.65;
+      display: none;
+      position: relative;
+      pointer-events: none;
+      overflow: hidden;
+
+      video {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        min-width: 100%;
+        min-height: 100%;
+        opacity: 1;
+      }
+
+      .vid-overlay {
+        position: absolute;
+        z-index: 3;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.5;
+        background: blue;
+      }
+    }
+  }
+
+  @media (min-width: 768px) {
+    main {
+      display: flex;
+
+      .right {
+        display: block;
+      }
+    }
+  }
+</style>

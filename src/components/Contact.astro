@@ -1,0 +1,122 @@
+---
+
+---
+
+<script>
+  import gsap from 'gsap';
+  import ScrollTrigger from 'gsap/ScrollTrigger';
+  import SplitType from 'split-type';
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  gsap.set('h4, .inner-contact span', {
+    yPercent: 100,
+  });
+  gsap.set('.inner-contact p', {
+    opacity: 0,
+  });
+
+  const contactTl = gsap.timeline({
+    scrollTrigger: {
+      trigger: '.inner-contact',
+      start: '-20% center',
+      end: '10% 40%',
+      scrub: true,
+    },
+  });
+
+  contactTl
+    .to('.line-top, .line-bottom', {
+      width: '100%',
+    })
+    .to('h4, .inner-contact span', {
+      yPercent: 0,
+      duration: 2,
+    })
+    .to('.inner-contact p', {
+      opacity: 1,
+    });
+</script>
+
+<section class='contact'>
+  <div class='inner-contact'>
+    <div class='line-top'></div>
+    <div class='layout-ws'>
+      <div class='mask'>
+        <h4>Reserve yours today.</h4>
+      </div>
+      <a href='#' class='cta'>
+        <div class='mask'>
+          <span>Put me on the list</span>
+        </div>
+      </a>
+      <p class='contact-desc'>
+        Due to the overwhelming demand for our latest luxury ring
+        collection, we've initiated an exclusive waitlist for eager
+        customers, ensuring you'll be among the first to experience
+        the elegance and craftsmanship of this exquisite piece as soon
+        as it becomes available.
+      </p>
+    </div>
+    <div class='line-bottom'></div>
+  </div>
+</section>
+
+<style>
+  section.contact {
+    background: #0f0f0d;
+    height: 130vh;
+    display: grid;
+    color: white;
+    align-content: center;
+
+    .inner-contact {
+      position: relative;
+
+      span {
+        display: block;
+      }
+
+      .line-top,
+      .line-bottom {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 0%;
+        height: 1px;
+        border-bottom: 1px solid #393939;
+      }
+
+      .line-bottom {
+        bottom: 0;
+        top: unset;
+      }
+    }
+
+    h4 {
+      font-size: clamp(2rem, 4vw, 5rem);
+      margin: 0;
+    }
+
+    a.cta {
+      background: white;
+      display: inline-block;
+      padding: 1em;
+      border-radius: 3em;
+      font-weight: bold;
+      font-size: clamp(1rem, 2vw, 1.3rem);
+      margin: 1.2em 0 2em;
+    }
+
+    .contact-desc {
+      font-size: 1.1rem;
+      margin: 0;
+    }
+  }
+
+  @media (min-width: 768px) {
+    section.contact .contact-desc {
+      width: 40%;
+    }
+  }
+</style>
